@@ -4,7 +4,8 @@
     "fs": "^0.0.1-security"
   },
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "build": "tsc --project ."
   },
   "devDependencies": {
     "@types/jest": "^26.0.24",
