@@ -40,7 +40,7 @@ app.get('/random', (req, res) => {
       res.sendFile(other[Math.floor(Math.random() * deepfakes.length)], { root: './bigrat.monster/media/' });
       break;
     default:
-      res.send('<script>window.location.href = \'https://www.youtube.com/watch?v=dQw4w9WgXcQ\'</script><noscript><a href=\'https://www.youtube.com/watch?v=dQw4w9WgXcQ\' style=\'font-family: monospace\'>What\'s this?</a></noscript>')
+      res.send('<script>window.location.href = \'https://short.sourtaste000.dev/Zs9H3F\'</script><noscript><a href=\'https://short.sourtaste000.dev/Zs9H3F\' style=\'font-family: monospace\'>What\'s this?</a></noscript>')
       break;
   }
 })
