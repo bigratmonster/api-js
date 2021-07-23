@@ -45,29 +45,17 @@ app.get('/random', (req, res) => {
   }
 })
 
-app.get('/freekr', (req, res) => {
-  res.sendFile('index.html', {root: './bigrat.monster/freekr/'})
-})
+app.get('/freekr', (req, res) => { res.sendFile('index.html', {root: './bigrat.monster/freekr/'}) })
 
-app.get('/facts', (req, res) => {
-  res.sendFile('index.html', {root: './bigrat.monster/facts/'})
-})
+app.get('/facts', (req, res) => { res.sendFile('index.html', {root: './bigrat.monster/facts/'}) })
 
-app.get('/facts', (req, res) => {
-  res.sendFile('index.html', {root: './bigrat.monster/facts/'})
-})
+app.get('/facts', (req, res) => { res.sendFile('index.html', {root: './bigrat.monster/facts/'}) })
 
-app.get('/printer', (req, res) => {
-  res.sendFile('index.html', {root: './bigrat.monster/printer/'})
-})
+app.get('/printer', (req, res) => { res.sendFile('index.html', {root: './bigrat.monster/printer/'}) })
 
-app.get('/quiz', (req, res) => {
-  res.sendFile('index.html', {root: './bigrat.monster/quiz/'})
-})
+app.get('/quiz', (req, res) => { res.sendFile('index.html', {root: './bigrat.monster/quiz/'}) })
 
-app.get('/', (req, res) => {
-  res.send('<pre>GET /random?category=[monkey | deepfake | other]</pre><pre>GET /freekr</pre><pre>GET /facts</pre><pre>GET /printer</pre><pre>GET /quiz</pre>')
-})
+app.get('/', (req, res) => { res.send('<pre>GET /random?category=[monkey | deepfake | other]</pre><pre>GET /freekr</pre><pre>GET /facts</pre><pre>GET /printer</pre><pre>GET /quiz</pre>') })
 
 app.use(function(req, res) {
   res.status(404);
@@ -77,3 +65,5 @@ app.use(function(req, res) {
 app.listen(port, () => {
   console.log(`Bigrat.monster API listening at http://localhost:${port}`)
 })
+
+// funny number haha
