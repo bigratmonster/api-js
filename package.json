@@ -9,6 +9,7 @@
     "typescript": "^4.5.4"
   },
   "scripts": {
-    "start": "node index.js"
+    "build": "node_modules/.bin/tsc",
+    "lint": "node_modules/.bin/eslint \"./index.ts\"",
   }
 }
