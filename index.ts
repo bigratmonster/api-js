@@ -1,29 +1,19 @@
-/* eslint-disable no-console */
-import * as fs from 'fs';
-import express from 'express';
+import { opine } from 'https://x.nest.land/opine@2.1.1/mod.ts';
 
-const app = express();
+if (!Deno.lstatSync("./bigrat.monster").isDirectory) {
+  Deno.run({ cmd: ["git", "clone", "https://github.com/bigratmonster/bigrat.monster"] })
+}
 
+const app = opine();
 const port = 8080;
 
 const monkeys: string[] = [];
 const deepfakes: string[] = [];
 const other: string[] = [];
 
-fs.readdir('./bigrat.monster/media/monkeys/', (err, files) => {
-  if (err) console.warn(err);
-  files.forEach((file) => { monkeys.push(file); });
-});
-
-fs.readdir('./bigrat.monster/media/deepfakes/', (err, files) => {
-  if (err) console.warn(err);
-  files.forEach((file) => { deepfakes.push(file); });
-});
-
-fs.readdir('./bigrat.monster/media/', (err, files) => {
-  if (err) console.warn(err);
-  files.forEach((file) => { other.push(file); });
-});
+for await (const file of Deno.readDir('./bigrat.monster/media/monkeys/')) monkeys.push(file.name);
+for await (const file of Deno.readDir('./bigrat.monster/media/deepfakes/')) deepfakes.push(file.name);
+for await (const file of Deno.readDir('./bigrat.monster/media/')) other.push(file.name);
 
 app.get('/random', (req, res) => {
   switch (req.query.category) {
@@ -61,7 +51,7 @@ app.get('/', (req, res) => {
 });
 
 app.use((req, res) => {
-  res.status(404);
+  res.sendStatus(404);
   res.sendFile('404.html', { root: './bigrat.monster' });
 });
 
