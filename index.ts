@@ -1,7 +1,9 @@
-import { opine } from 'https://x.nest.land/opine@2.1.1/mod.ts';
+import { opine } from "https://x.nest.land/opine@2.1.1/mod.ts";
 
 if (!Deno.lstatSync("./bigrat.monster").isDirectory) {
-  Deno.run({ cmd: ["git", "clone", "https://github.com/bigratmonster/bigrat.monster"] })
+  Deno.run({
+    cmd: ["git", "clone", "https://github.com/bigratmonster/bigrat.monster"],
+  });
 }
 
 const app = opine();
@@ -11,38 +13,62 @@ const monkeys: string[] = [];
 const deepfakes: string[] = [];
 const other: string[] = [];
 
-for await (const file of Deno.readDir('./bigrat.monster/media/monkeys/')) monkeys.push(file.name);
-for await (const file of Deno.readDir('./bigrat.monster/media/deepfakes/')) deepfakes.push(file.name);
-for await (const file of Deno.readDir('./bigrat.monster/media/')) other.push(file.name);
+for await (const file of Deno.readDir("./bigrat.monster/media/monkeys/")) {
+  monkeys.push(file.name);
+}
+for await (const file of Deno.readDir("./bigrat.monster/media/deepfakes/")) {
+  deepfakes.push(file.name);
+}
+for await (const file of Deno.readDir("./bigrat.monster/media/")) {
+  other.push(file.name);
+}
 
-app.get('/random', (req, res) => {
+app.get("/random", (req, res) => {
   switch (req.query.category) {
-    case 'monkey':
-      res.sendFile(monkeys[Math.floor(Math.random() * monkeys.length)], { root: './bigrat.monster/media/monkeys/' });
+    case "monkey":
+      res.sendFile(monkeys[Math.floor(Math.random() * monkeys.length)], {
+        root: "./bigrat.monster/media/monkeys/",
+      });
       break;
-    case 'deepfake':
-      res.sendFile(deepfakes[Math.floor(Math.random() * deepfakes.length)], { root: './bigrat.monster/media/deepfakes/' });
+    case "deepfake":
+      res.sendFile(deepfakes[Math.floor(Math.random() * deepfakes.length)], {
+        root: "./bigrat.monster/media/deepfakes/",
+      });
       break;
-    case 'other':
-      res.sendFile(other[Math.floor(Math.random() * deepfakes.length)], { root: './bigrat.monster/media/' });
+    case "other":
+      res.sendFile(other[Math.floor(Math.random() * deepfakes.length)], {
+        root: "./bigrat.monster/media/",
+      });
       break;
     default:
-      res.send('<script>window.location.href = \'https://www.youtube.com/watch?v=HUgMWJKn2YY\'</script><noscript><a href=\'https://www.youtube.com/watch?v=HUgMWJKn2YY\' style=\'font-family: monospace\'>404</a></noscript>');
+      res.send(
+        "<script>window.location.href = 'https://www.youtube.com/watch?v=HUgMWJKn2YY'</script><noscript><a href='https://www.youtube.com/watch?v=HUgMWJKn2YY' style='font-family: monospace'>404</a></noscript>",
+      );
       break;
   }
 });
 
-app.get('/freekr', (req, res) => { res.sendFile('index.html', { root: './bigrat.monster/freekr/' }); });
+app.get("/freekr", (req, res) => {
+  res.sendFile("index.html", { root: "./bigrat.monster/freekr/" });
+});
 
-app.get('/facts', (req, res) => { res.sendFile('index.html', { root: './bigrat.monster/facts/' }); });
+app.get("/facts", (req, res) => {
+  res.sendFile("index.html", { root: "./bigrat.monster/facts/" });
+});
 
-app.get('/facts', (req, res) => { res.sendFile('index.html', { root: './bigrat.monster/facts/' }); });
+app.get("/facts", (req, res) => {
+  res.sendFile("index.html", { root: "./bigrat.monster/facts/" });
+});
 
-app.get('/printer', (req, res) => { res.sendFile('index.html', { root: './bigrat.monster/printer/' }); });
+app.get("/printer", (req, res) => {
+  res.sendFile("index.html", { root: "./bigrat.monster/printer/" });
+});
 
-app.get('/quiz', (req, res) => { res.sendFile('index.html', { root: './bigrat.monster/quiz/' }); });
+app.get("/quiz", (req, res) => {
+  res.sendFile("index.html", { root: "./bigrat.monster/quiz/" });
+});
 
-app.get('/', (req, res) => {
+app.get("/", (req, res) => {
   res.send(`
   <pre>GET /random?category=[monkey | deepfake | other]</pre><pre>GET /freekr</pre>
   <pre>GET /facts</pre>
@@ -52,7 +78,7 @@ app.get('/', (req, res) => {
 
 app.use((req, res) => {
   res.sendStatus(404);
-  res.sendFile('404.html', { root: './bigrat.monster' });
+  res.sendFile("404.html", { root: "./bigrat.monster" });
 });
 
 app.listen(port, () => {
