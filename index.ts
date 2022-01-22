@@ -1,9 +1,11 @@
 import { opine } from "https://x.nest.land/opine@2.1.1/mod.ts";
 
-if (!Deno.lstatSync("./bigrat.monster").isDirectory) {
-  Deno.run({
+try {
+  Deno.lstatSync("./bigrat.monster").isDirectory;
+} catch (_){
+  await Deno.run({
     cmd: ["git", "clone", "https://github.com/bigratmonster/bigrat.monster"],
-  });
+  }).status();
 }
 
 const app = opine();
