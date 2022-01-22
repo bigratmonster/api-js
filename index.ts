@@ -48,27 +48,27 @@ app.get("/random", (req, res) => {
   }
 });
 
-app.get("/freekr", (req, res) => {
+app.get("/freekr", (_, res) => {
   res.sendFile("index.html", { root: "./bigrat.monster/freekr/" });
 });
 
-app.get("/facts", (req, res) => {
+app.get("/facts", (_, res) => {
   res.sendFile("index.html", { root: "./bigrat.monster/facts/" });
 });
 
-app.get("/facts", (req, res) => {
+app.get("/facts", (_, res) => {
   res.sendFile("index.html", { root: "./bigrat.monster/facts/" });
 });
 
-app.get("/printer", (req, res) => {
+app.get("/printer", (_, res) => {
   res.sendFile("index.html", { root: "./bigrat.monster/printer/" });
 });
 
-app.get("/quiz", (req, res) => {
+app.get("/quiz", (_, res) => {
   res.sendFile("index.html", { root: "./bigrat.monster/quiz/" });
 });
 
-app.get("/", (req, res) => {
+app.get("/", (_, res) => {
   res.send(`
   <pre>GET /random?category=[monkey | deepfake | other]</pre><pre>GET /freekr</pre>
   <pre>GET /facts</pre>
@@ -76,7 +76,7 @@ app.get("/", (req, res) => {
   <pre>GET /quiz</pre>`.trimStart());
 });
 
-app.use((req, res) => {
+app.use((_, res) => {
   res.sendStatus(404);
   res.sendFile("404.html", { root: "./bigrat.monster" });
 });
